@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git') {
+            steps {
+                git branch: 'java', url: 'https://github.com/Pravalikadev/Docker_task.git'
+            }
+        }
+        stage('java'){
+            steps {
+                sh '''javac hello.java
+java hello'''
+            }
+        }
+        stage('git1'){
+            steps {
+                git branch: 'shellscript', url: 'https://github.com/Pravalikadev/Docker_task.git'
+                
+            }
+        }
+        stage('shellscript'){
+            steps {
+                sh '''chmod 777 shellscript.sh
+./shellscript.sh'''
+            }
+        }
+        stage('git2'){
+            steps {
+                git branch: 'maven', url: 'https://github.com/Pravalikadev/Docker_task.git'
+            }
+        }
+        stage('maven'){
+            steps {
+                sh 'mvn clean'
+            }
+        }
+        
+    
+    }
+}
+
